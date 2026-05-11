@@ -1,7 +1,14 @@
 // import React from 'react'
 
 import { useState, useRef } from "react";
+import {useNavigate} from "react-router-dom"
 import Head from "./Head";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import app from "../utils/firebase";
 
 const LoginPage = () => {
   const [showinput, setShowInput] = useState(false);
@@ -14,10 +21,11 @@ const LoginPage = () => {
   const inputref = useRef();
   const passwordref = useRef();
   const emailref = useRef();
+  const navigate = useNavigate()
 
   const handleSubmit = () => {
     let isvalid = true;
-    if (showinput) {
+    if (showinput && inputref?.current?.value==="") {
       setUsernameError("please enter the Username");
       isvalid = false;
     } else {
@@ -32,6 +40,45 @@ const LoginPage = () => {
     }
 
     if (isvalid) {
+      const auth = getAuth(app);
+      if (showinput) {
+        createUserWithEmailAndPassword(
+          auth,
+          emailref?.current?.value,
+          passwordref?.current?.value,
+        )
+          .then((userCredential) => {
+            // Signed up
+            const user = userCredential.user;
+            console.log("user: ", user);
+            navigate("/browse");
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("errorMessage: ", errorMessage);
+            // ..
+          });
+      } else {
+        signInWithEmailAndPassword(
+          auth,
+          emailref?.current?.value,
+          passwordref?.current?.value,
+        )
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log("user: ", user);
+            navigate("/browse");
+            // ...
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("errorMessage: ", errorMessage);
+          });
+      }
+
       setUsernameError("");
       setShowEmailMsg("");
       setshowPasswordMsg("");
@@ -53,7 +100,7 @@ const LoginPage = () => {
 
       <div className="absolute inset-0 bg-black opacity-60"></div>
 
-      <div className="login absolute text-center  w-110 text-white z-20 rounded-md bg-black/70  p-5  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="login absolute text-center  w-110 text-white z-20 rounded-md bg-black/70  p-5  top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <h1 className="text-2xl font-bold">Enter your Info to Sign In</h1>
         {!showinput && (
           <p

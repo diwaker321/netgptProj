@@ -9,6 +9,8 @@
     npm install react-router-dom
 4. setup the store
     npm install @reduxjs/toolkit react-redux
+5. setup firebase for backend
+    npm install firebase
 
 
 # what to build
