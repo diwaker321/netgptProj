@@ -9,6 +9,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import app from "../utils/firebase";
+// import { useDispatch } from "react-redux";
+// import { adduser } from "../store/userSlice";
 
 const LoginPage = () => {
   const [showinput, setShowInput] = useState(false);
@@ -22,6 +24,7 @@ const LoginPage = () => {
   const passwordref = useRef();
   const emailref = useRef();
   const navigate = useNavigate()
+  // const dispatch = useDispatch()
 
   const handleSubmit = () => {
     let isvalid = true;
@@ -51,6 +54,7 @@ const LoginPage = () => {
             // Signed up
             const user = userCredential.user;
             console.log("user: ", user);
+            // dispatch(adduser(data))
             navigate("/browse");
           })
           .catch((error) => {

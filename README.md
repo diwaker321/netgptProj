@@ -11,6 +11,8 @@
     npm install @reduxjs/toolkit react-redux
 5. setup firebase for backend
     npm install firebase
+6. Make a redux store to store things
+    npm install @reduxjs/toolkit react-redux
 
 
 # what to build
