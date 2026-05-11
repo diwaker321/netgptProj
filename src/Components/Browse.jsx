@@ -1,10 +1,15 @@
 // import React from 'react'
 
+import Head from "./Head"
+
 const Browse = () => {
   return (
-    <div>
+    <>
+    <Head/>
+    <div className="relative top-14 p-5">
       <p>browse section</p>
     </div>
+    </>
   )
 }
 

@@ -1,6 +1,4 @@
-// import React from 'react'
 import Browse from "./Browse"
-// import Head from "./Head"
 import LoginPage from "./LoginPage"
 import  { createBrowserRouter , RouterProvider} from "react-router-dom"
 
@@ -16,7 +14,7 @@ const Body = () => {
         }
     ])
   return (
-    <div className="absolute">
+    <div>
     <RouterProvider router={appRouter}/>
     </div>
   )
