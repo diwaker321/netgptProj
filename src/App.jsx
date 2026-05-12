@@ -15,7 +15,6 @@ function App() {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('user: ', user);
         const {uid , displayName , email} = user;
         dispatch(adduser({uid:uid , displayName:displayName , email:email})) 
       } else {

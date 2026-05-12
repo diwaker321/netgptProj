@@ -1,16 +1,17 @@
 // import React from 'react'
 
 import { useState, useRef } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import Head from "./Head";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import app from "../utils/firebase";
-// import { useDispatch } from "react-redux";
-// import { adduser } from "../store/userSlice";
+import { useDispatch } from "react-redux";
+import { adduser } from "../store/userSlice";
 
 const LoginPage = () => {
   const [showinput, setShowInput] = useState(false);
@@ -23,12 +24,12 @@ const LoginPage = () => {
   const inputref = useRef();
   const passwordref = useRef();
   const emailref = useRef();
-  const navigate = useNavigate()
-  // const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSubmit = () => {
     let isvalid = true;
-    if (showinput && inputref?.current?.value==="") {
+    if (showinput && inputref?.current?.value === "") {
       setUsernameError("please enter the Username");
       isvalid = false;
     } else {
@@ -53,12 +54,24 @@ const LoginPage = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            console.log("user: ", user);
-            // dispatch(adduser(data))
-            navigate("/browse");
+            updateProfile(user, {
+              displayName: inputref?.current?.value,
+              photoURL: null,
+            })
+              .then(() => {
+                const { uid, displayName, email } = auth.currentUser;
+                dispatch(
+                  adduser({ uid: uid, displayName: displayName, email: email }),
+                );
+                navigate("/browse");
+                inputref.current.value = "";
+              })
+              .catch((error) => {
+                console.log("error: ", error);
+              });
+            // navigate("/browse");
           })
           .catch((error) => {
-            // const errorCode = error.code;
             const errorMessage = error.message;
             console.log("errorMessage: ", errorMessage);
             // ..
@@ -73,6 +86,8 @@ const LoginPage = () => {
             // Signed in
             const user = userCredential.user;
             console.log("user: ", user);
+            emailref.current.value = "";
+            passwordref.current.value = "";
             navigate("/browse");
             // ...
           })
@@ -86,11 +101,11 @@ const LoginPage = () => {
       setUsernameError("");
       setShowEmailMsg("");
       setshowPasswordMsg("");
-      if (showinput) {
-        inputref.current.value = "";
-      }
-      emailref.current.value = "";
-      passwordref.current.value = "";
+      // if (showinput) {
+      //   inputref.current.value = "";
+      // }
+      // emailref.current.value = "";
+      // passwordref.current.value = "";
     }
   };
   return (
