@@ -13,6 +13,8 @@
     npm install firebase
 6. Make a redux store to store things
     npm install @reduxjs/toolkit react-redux
+7. Make a account in TMDB 
+    go through the docs. of TMDB web after login
 
 
 # what to build
