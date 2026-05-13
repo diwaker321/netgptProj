@@ -25,9 +25,7 @@ function App() {
 
   return (
     <div className="mainContainer relative">
-      {/* <Head/> */}
         <Body />
-      {/* </Provider> */}
     </div>
   );
 }

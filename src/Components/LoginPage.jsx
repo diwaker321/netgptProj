@@ -12,6 +12,7 @@ import {
 import app from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { adduser } from "../store/userSlice";
+import { NetflixBG_LOGO } from "../utils/constant";
 
 const LoginPage = () => {
   const [showinput, setShowInput] = useState(false);
@@ -27,7 +28,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const userinfo = useSelector(store=>store.user)
-  console.log('userinfo: ', userinfo);
 
   const handleSubmit = () => {
     let isvalid = true;
@@ -112,7 +112,6 @@ const LoginPage = () => {
   };
 
   if(userinfo){
-    // navigate("/browse")
      return <Navigate to="/browse" />;
   }
   return (
@@ -120,7 +119,7 @@ const LoginPage = () => {
       <Head inputtoggle={showinput} handleinputtoggle={setShowInput} />
       <img
         className="object-cover w-full"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/76c5a455-c62c-46d4-8653-3924728113e3/web/IN-en-20260504-TRIFECTA-perspective_596176fe-3b1e-48ec-8a00-a0acb34e68f1_large.jpg"
+        src={NetflixBG_LOGO}
         alt=""
       />
 
