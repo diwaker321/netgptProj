@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Head from "./Head";
 import {
   getAuth,
@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { adduser } from "../store/userSlice";
 
 const LoginPage = () => {
@@ -26,6 +26,8 @@ const LoginPage = () => {
   const emailref = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const userinfo = useSelector(store=>store.user)
+  console.log('userinfo: ', userinfo);
 
   const handleSubmit = () => {
     let isvalid = true;
@@ -108,6 +110,11 @@ const LoginPage = () => {
       // passwordref.current.value = "";
     }
   };
+
+  if(userinfo){
+    // navigate("/browse")
+     return <Navigate to="/browse" />;
+  }
   return (
     <div className="loginMainContainer relative">
       <Head inputtoggle={showinput} handleinputtoggle={setShowInput} />

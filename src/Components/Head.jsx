@@ -37,7 +37,7 @@ const Head = ({ inputtoggle, handleinputtoggle }) => {
         {location.pathname === "/browse" ? (
           <>
             <h1 className="text-xl font-medium px-2">
-              Hello {userInfo.displayName}
+              Hello {userInfo?.displayName}
             </h1>
             <button
               onClick={handlesignout}
