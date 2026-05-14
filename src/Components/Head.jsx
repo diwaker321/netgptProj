@@ -26,7 +26,7 @@ const Head = ({ inputtoggle, handleinputtoggle }) => {
   };
   const location = useLocation();
   return (
-    <div className="mainheaderSection absolute z-10 flex justify-between px-25 items-center">
+    <div className="mainheaderSection absolute z-10 flex justify-between px-25 items-center bg-gradient-to-b from-black/80 to-transparent">
       <img
         className="cursor-pointer"
         width={"19%"}
@@ -37,7 +37,7 @@ const Head = ({ inputtoggle, handleinputtoggle }) => {
       <div className="flex  gap-2 items-center">
         {location.pathname === "/browse" ? (
           <>
-            <h1 className="text-xl font-medium px-2">
+            <h1 className="text-xl text-white font-medium px-2">
               Hello {userInfo?.displayName}
             </h1>
             <button

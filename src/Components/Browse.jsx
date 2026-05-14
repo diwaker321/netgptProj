@@ -6,6 +6,8 @@ import { Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { API_Options, Now_Playing_Api } from "../utils/constant";
 import { addNowPlayingMovies } from "../store/movieSlice";
+import MainmovieSection from "./MainmovieSection";
+import SecondarySection from "./SecondarySection";
 
 const Browse = () => {
   const dispatch = useDispatch()
@@ -28,8 +30,9 @@ const Browse = () => {
   return (
     <>
       <Head />
-      <div className="relative top-14 p-5">
-        <p>browse section</p>
+      <div className="relative ">
+        <MainmovieSection/>
+        <SecondarySection/>
       </div>
     </>
   );
