@@ -1,7 +1,7 @@
 import { imageURL } from "../utils/constant"
 
 const VideoTitle = ({title , desc, Image}) => {
-  console.log('Image: ', Image);
+  // console.log('Image: ', Image);
     // console.log('Image: ', Image);
     // console.log('desc: ', desc);
     // console.log('title: ', title);
