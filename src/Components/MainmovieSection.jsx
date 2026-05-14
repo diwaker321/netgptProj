@@ -7,12 +7,14 @@ const MainmovieSection = () => {
   if (movieTrailer == null) return;
 
 //   console.log("movieTrailer: ", movieTrailer[0]);
-  const { original_title, overview, poster_path , id } = movieTrailer[0];
+const randomIndex = Math.floor(Math.random()* movieTrailer.length)
+// console.log('randomIndex: ', randomIndex);
+  const { original_title, overview, poster_path , id } = movieTrailer[randomIndex];
 //   console.log('id: ', id);
   return (
     <div>
-      <VideoCard id={id} />
       <VideoTitle title={original_title} desc={overview} Image={poster_path}  />
+      <VideoCard id={id} />
     </div>
   );
 };
